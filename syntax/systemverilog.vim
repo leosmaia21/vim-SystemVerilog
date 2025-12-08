@@ -16,11 +16,9 @@
 
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
-if version < 600
-  syntax clear
-elseif exists("b:current_syntax")
-  finish
-endif
+"if version < 600
+  "syntax clear
+"endif
 
 " A bunch of useful SV keywords
 syn keyword	svStatement	always always_comb always_ff always_latch assert
@@ -149,7 +147,8 @@ syn match	svSpaceError		display	" \+\t"me=e-1
 "catch errors caused by wrong parenthesis and brackets
 syn cluster	svParenGroup		contains=svParenError,svIncluded,svSpecial,svCommentSkip,svCommentString,svComment2String,@svCommentGroup,svCommentStartError,svUserCont,svUserLabel,svBitField,svCommentSkip,svOctalZero,svCppOut,svCppOut2,svCppSkip,svFormat,svNumber,svFloat,svOctal,svOctalError,svNumbersCom
 
-syn region	svParen		transparent start='(' end=')' contains=ALLBUT,@svParenGroup,svCppParen,svErrInBracket,svCppBracket,svCppString,@Spell
+"syn region	svParen		transparent start='(' end=')' contains=ALLBUT,@svParenGroup,svCppParen,svErrInBracket,svCppBracket,svCppString,@Spell
+syn region	svParen		transparent start='(' end=')' contains=ALLBUT,@svParenGroup,svCppParen,svCppBracket,svCppString,@Spell
 " svCppParen: same as svParen but ends at end-of-line; used in svDefine
 syn region	svCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@svParenGroup,svErrInBracket,svParen,svBracket,svString,@Spell
 syn match	svParenError	display "[\])]"
@@ -159,7 +158,7 @@ syn region	svBracket	transparent start='\[' end=']' contains=ALLBUT,@svParenGrou
 
 " svCppBracket: same as svParen but ends at end-of-line; used in svDefine
 syn region	svCppBracket	transparent start='\[' skip='\\$' excludenl end=']' end='$' contained contains=ALLBUT,@svParenGroup,svErrInParen,svParen,svBracket,svString,@Spell
-syn match	svErrInBracket	display contained "[);{}]"
+"syn match	svErrInBracket	display contained "[);{}]"
 
 "integer number, or floating point number without a dot and with "f".
 syn case ignore
@@ -199,14 +198,14 @@ if exists("sv_comment_strings")
   " need to use a special type of svString: svCommentString, which also ends on
   " "*/", and sees a "*" at the start of the line as comment again.
   " Unfortunately this doesn't work very well for // type of comments :-(
-  syntax match	svCommentSkip		contained "^\s*\*\($\|\s\+\)"
-  syntax region svCommentString		contained start=+L\=\\\@<!"+ skip=+\\\\\|\\"+ end=+"+ end=+\*/+me=s-1 contains=svSpecial,svCommentSkip
-  syntax region svComment2String	contained start=+\\\@<!"+ skip=+\\\\\|\\"+ end=+"+ end="$" contains=svSpecial
-  syntax region	svCommentL		start="//" skip="\\$" end="$" keepend contains=@svCommentGroup,svComment2String,svCharacter,svNumbersCom,svSpaceError,@Spell
+  "syntax match	svCommentSkip		contained "^\s*\*\($\|\s\+\)"
+  "syntax region svCommentString		contained start=+L\=\\\@<!"+ skip=+\\\\\|\\"+ end=+"+ end=+\*/+me=s-1 contains=svSpecial,svCommentSkip
+  "syntax region svComment2String	contained start=+\\\@<!"+ skip=+\\\\\|\\"+ end=+"+ end="$" contains=svSpecial
+  syntax region	svCommentL		start="//" skip="\\$" end="$" keepend contains=@svCommentGroup,svComment2String,svCharacter,svSpaceError,@Spell
   if exists("sv_no_comment_fold")
-    syntax region svComment	matchgroup=svCommentStart start="/\*" end="\*/" contains=@svCommentGroup,svCommentStartError,svCommentString,svCharacter,svNumbersCom,svSpaceError,@Spell
+    syntax region svComment	matchgroup=svCommentStart start="/\*" end="\*/" contains=@svCommentGroup,svCommentStartError,svCommentString,svCharacter,svSpaceError,@Spell
   else
-    syntax region svComment	matchgroup=svCommentStart start="/\*" end="\*/" contains=@svCommentGroup,svCommentStartError,svCommentString,svCharacter,svNumbersCom,svSpaceError,@Spell fold
+    syntax region svComment	matchgroup=svCommentStart start="/\*" end="\*/" contains=@svCommentGroup,svCommentStartError,svCommentString,svCharacter,svSpaceError,@Spell fold
   endif
 else
   syn region	svCommentL	start="//" skip="\\$" end="$" keepend contains=@svCommentGroup,svSpaceError,@Spell
@@ -359,16 +358,16 @@ if version >= 508 || !exists("did_systemverilog_syn_inits")
   " HiLink svConstant		Constant
   HiLink svConstant		Keyword
   HiLink svUserConstant		Constant
-  HiLink svCommentString	svString
-  HiLink svComment2String	svString
-  HiLink svCommentSkip		svComment
+  "HiLink svCommentString	svString
+  "HiLink svComment2String	svString
+  "HiLink svCommentSkip		svComment
   HiLink svString		String
   HiLink svComment		Comment
   HiLink svSpecial		SpecialChar
   HiLink svTodo			Todo
   HiLink svCppSkip		svCppOut
   HiLink svCppOut2		svCppOut
-  HiLink svCppOut		Comment
+  "HiLink svCppOut		Comment
 
   delcommand HiLink
 endif
