@@ -77,7 +77,7 @@ syn cluster	svOperGroup	contains=svOperator,svOperParen,svNumber,svString,svOper
 " syn match	svOperator	"++\|--\|&\|\~&\||\|\~|\|^\|\~^\|\~\|><"
 " syn match	svOperator	"*\|/\|%\|+\|-\|<<\|>>\|<\|<=\|>\|>=\|!in"
 " syn match	svOperator	"=?=\|!?=\|==\|!=\|===\|!==\|&\~\|^\~\||\~"
- syn match	svTask	"&&\|||\|=\|+=\|-=\|*=\|/=\|%=\|<<=\|>>=\|&="
+"syn match	svError	        "&&\|||\|=\|+=\|-=\|*=\|/=\|%=\|<<=\|>>=\|&="
 " syn match	svOperator	"|=\|^=\|\~&=\|\~|=\|\~^="
 
 syn match	svOperator	"[&|\~><!*@+/=,.\^\-]"
@@ -190,7 +190,7 @@ syn match	svFloat		display contained "0x\x\+\.\=p[-+]\=\d\+[fl]\=\>"
 syn match	svOctalError	display contained "0\o*[89]\d*"
 syn case match
 
-let sv_comment_strings = 1
+let sv_comment_strings = 0
 
 if exists("sv_comment_strings")
   " A comment can contain svString, svCharacter and svNumber.
@@ -367,7 +367,7 @@ if version >= 508 || !exists("did_systemverilog_syn_inits")
   HiLink svTodo			Todo
   HiLink svCppSkip		svCppOut
   HiLink svCppOut2		svCppOut
-  "HiLink svCppOut		Comment
+  HiLink svCppOut		Comment
 
   delcommand HiLink
 endif
