@@ -26,12 +26,12 @@ syn keyword	svStatement	break return continue fork join disable force release as
 syn keyword	svStatement	join_any join_none frokjoin binsof intersect wait wait_order
 
 syn keyword	svLabel		bind constraint covergroup coverpoint
-syn keyword	svLabel		class CLOCK clocking default function generate interface modport 
+"syn keyword	svLabel		class CLOCK clocking default function generate interface modport 
 syn keyword	svLabel		package program property randseq sequence specify
-syn keyword	svLabel		task 
+"syn keyword	svLabel		task 
 syn keyword	svLabel		begin initial module forever final import 
-syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram endmodule 
-syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
+"syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram endmodule 
+"syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
 
 syn keyword	svConditional	if iff else case casex casez endcase randcase
 syn keyword	svConditional	unique priority randsequence endsequence 
@@ -44,10 +44,10 @@ syn keyword 	svModifier	shadow soft solve static super this typedef unpacked var
 syn keyword 	svModifier	vca virtual virtuals wildcard with
 syn keyword 	svModifier	ref const pure automatic
 
-syn keyword 	svType		reg string enum struct event bit semaphore
-syn keyword 	svType		rand randc integer parameter localparam specparam defparam
-syn keyword 	svType		logic int mailbox input output inout unsigned signed time wire
-syn keyword 	svType		shortint longint byte real
+"syn keyword 	svType		reg string enum struct event bit semaphore
+"syn keyword 	svType		rand randc integer parameter localparam specparam defparam
+"syn keyword 	svType		logic int mailbox input output inout unsigned signed time wire
+"syn keyword 	svType		shortint longint byte real
 
 "syn keyword     svDeprecated	call_func call_task close_conn get_bind get_bind_id
 "syn keyword     svDeprecated	get_conn_err mailbox_receive mailbox_send make_client
