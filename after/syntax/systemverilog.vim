@@ -25,11 +25,11 @@ syn keyword	svStatement	always always_comb always_ff always_latch assert
 syn keyword	svStatement	break return continue fork join disable force release assign alias
 syn keyword	svStatement	join_any join_none frokjoin binsof intersect wait wait_order
 
-syn keyword	svLabel		bind constraint covergroup coverpoint
+"syn keyword	svLabel		bind constraint covergroup coverpoint
 "syn keyword	svLabel		class CLOCK clocking default function generate interface modport 
-syn keyword	svLabel		package program property randseq sequence specify
+"syn keyword	svLabel		package program property randseq sequence specify
 "syn keyword	svLabel		task 
-syn keyword	svLabel		begin initial module forever final import 
+"syn keyword	svLabel		begin initial module forever final import 
 "syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram endmodule 
 "syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
 
@@ -75,9 +75,9 @@ syn match       svTask          "\$[a-zA-Z0-9_]\+\>"
 
 syn cluster	svOperGroup	contains=svOperator,svOperParen,svNumber,svString,svOperOk,svType
 " syn match	svOperator	"++\|--\|&\|\~&\||\|\~|\|^\|\~^\|\~\|><"
-" syn match	svOperator	"*\|/\|%\|+\|-\|<<\|>>\|<\|<=\|>\|>=\|!in"
+ syn match	svOperator	"*\|/\|%\|+\|-\|<<\|>>\|<\|<=\|>\|>=\|!in"
 " syn match	svOperator	"=?=\|!?=\|==\|!=\|===\|!==\|&\~\|^\~\||\~"
-" syn match	svOperator	"&&\|||\|=\|+=\|-=\|*=\|/=\|%=\|<<=\|>>=\|&="
+ syn match	svOperator	"&&\|||\|=\|+=\|-=\|*=\|/=\|%=\|<<=\|>>=\|&="
 " syn match	svOperator	"|=\|^=\|\~&=\|\~|=\|\~^="
 
 syn match	svOperator	"[&|\~><!*@+/=,.\^\-]"
