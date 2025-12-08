@@ -77,7 +77,7 @@ syn cluster	svOperGroup	contains=svOperator,svOperParen,svNumber,svString,svOper
 " syn match	svOperator	"++\|--\|&\|\~&\||\|\~|\|^\|\~^\|\~\|><"
 " syn match	svOperator	"*\|/\|%\|+\|-\|<<\|>>\|<\|<=\|>\|>=\|!in"
 " syn match	svOperator	"=?=\|!?=\|==\|!=\|===\|!==\|&\~\|^\~\||\~"
-" syn match	svOperator	"&&\|||\|=\|+=\|-=\|*=\|/=\|%=\|<<=\|>>=\|&="
+ syn match	svTask	"&&\|||\|=\|+=\|-=\|*=\|/=\|%=\|<<=\|>>=\|&="
 " syn match	svOperator	"|=\|^=\|\~&=\|\~|=\|\~^="
 
 syn match	svOperator	"[&|\~><!*@+/=,.\^\-]"
@@ -148,16 +148,16 @@ syn match	svSpaceError		display	" \+\t"me=e-1
 syn cluster	svParenGroup		contains=svParenError,svIncluded,svSpecial,svCommentSkip,svCommentString,svComment2String,@svCommentGroup,svCommentStartError,svUserCont,svUserLabel,svBitField,svCommentSkip,svOctalZero,svCppOut,svCppOut2,svCppSkip,svFormat,svNumber,svFloat,svOctal,svOctalError,svNumbersCom
 
 "syn region	svParen		transparent start='(' end=')' contains=ALLBUT,@svParenGroup,svCppParen,svErrInBracket,svCppBracket,svCppString,@Spell
-"syn region	svParen		transparent start='(' end=')' contains=ALLBUT,@svParenGroup,svCppParen,svCppBracket,svCppString,@Spell
+syn region	svParen		transparent start='(' end=')' contains=ALLBUT,@svParenGroup,svCppParen,svCppBracket,svCppString,@Spell
 " svCppParen: same as svParen but ends at end-of-line; used in svDefine
-"syn region	svCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@svParenGroup,svErrInBracket,svParen,svBracket,svString,@Spell
+syn region	svCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@svParenGroup,svErrInBracket,svParen,svBracket,svString,@Spell
 "syn match	svParenError	display "[\])]"
 " syn match	svErrInParen	display contained "[\]{}]"
 "syn match	svErrInParen	display contained "[\]]"
-"syn region	svBracket	transparent start='\[' end=']' contains=ALLBUT,@svParenGroup,svErrInParen,svCppParen,svCppBracket,svCppString,@Spell
+syn region	svBracket	transparent start='\[' end=']' contains=ALLBUT,@svParenGroup,svCppParen,svCppBracket,svCppString,@Spell
 
 " svCppBracket: same as svParen but ends at end-of-line; used in svDefine
-"syn region	svCppBracket	transparent start='\[' skip='\\$' excludenl end=']' end='$' contained contains=ALLBUT,@svParenGroup,svErrInParen,svParen,svBracket,svString,@Spell
+syn region	svCppBracket	transparent start='\[' skip='\\$' excludenl end=']' end='$' contained contains=ALLBUT,@svParenGroup,svParen,svBracket,svString,@Spell
 "syn match	svErrInBracket	display contained "[);{}]"
 
 "integer number, or floating point number without a dot and with "f".
@@ -265,7 +265,7 @@ syn region	svIncluded	display contained start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn match	svIncluded	display contained "<[^>]*>"
 syn match	svInclude	display "^\s*\(`\|#\)\s*include\>\s*["<]" contains=svIncluded
 "syn match svLineSkip	"\\$"
-syn cluster	svPreProcGroup	contains=svPreCondit,svIncluded,svInclude,svDefine,svErrInParen,svErrInBracket,svUserLabel,svSpecial,svOctalZero,svCppOut,svCppOut2,svCppSkip,svFormat,svNumber,svFloat,svOctal,svOctalError,svNumbersCom,svString,svCommentSkip,svCommentString,svComment2String,@svCommentGroup,svCommentStartError,svParen,svBracket,svMulti
+syn cluster	svPreProcGroup	contains=svPreCondit,svIncluded,svInclude,svDefine,svErrInBracket,svUserLabel,svSpecial,svOctalZero,svCppOut,svCppOut2,svCppSkip,svFormat,svNumber,svFloat,svOctal,svOctalError,svNumbersCom,svString,svCommentSkip,svCommentString,svComment2String,@svCommentGroup,svCommentStartError,svParen,svBracket,svMulti
 syn region	svDefine	start="^\s*\(`\|#\)\s*\(define\|undef\)\>" skip="\\$" end="$" end="//"me=s-1 contains=ALLBUT,@svPreProcGroup,@Spell
 syn region	svPreProc	start="^\s*\(`\|#\)\s*\(pragma\>\|line\>\|warning\>\|error\>\)" skip="\\$" end="$" keepend contains=ALLBUT,@svPreProcGroup,@Spell
 
