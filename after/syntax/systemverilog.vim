@@ -25,30 +25,30 @@ syn keyword	svStatement	always always_comb always_ff always_latch assert
 syn keyword	svStatement	break return continue fork join disable force release assign alias
 syn keyword	svStatement	join_any join_none frokjoin binsof intersect wait wait_order
 
-"syn keyword	svLabel		bind constraint covergroup coverpoint
-"syn keyword	svLabel		class CLOCK clocking default function generate interface modport 
-"syn keyword	svLabel		package program property randseq sequence specify
-"syn keyword	svLabel		task 
-"syn keyword	svLabel		begin initial module forever final import 
-"syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram endmodule 
-"syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
+syn keyword	svLabel		bind constraint covergroup coverpoint
+syn keyword	svLabel		class CLOCK clocking default function interface modport 
+syn keyword	svLabel		package program property randseq sequence specify
+syn keyword	svLabel		task 
+syn keyword	svLabel		begin initial forever final import 
+syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram
+syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
 
 syn keyword	svConditional	if iff else case casex casez endcase randcase
 syn keyword	svConditional	unique priority randsequence endsequence 
 syn keyword 	svRepeat	repeat while for do foreach
 syn keyword 	svModifier	after all any around assoc_size async
-"syn keyword 	svModifier	before big_endian bit_normal bit_reverse export
-syn keyword 	svModifier	before big_endian bit_normal bit_reverse
+syn keyword 	svModifier	before big_endian bit_normal bit_reverse export
+"syn keyword 	svModifier	before big_endian bit_normal bit_reverse
 syn keyword 	svModifier	extends extern hdl_node hdl_task implements interconnect little_endian local
 syn keyword 	svModifier	negedge nettype none packed protected posedge public rules
 syn keyword 	svModifier	shadow soft solve static super this typedef unpacked var
 syn keyword 	svModifier	vca virtual virtuals wildcard with
 syn keyword 	svModifier	ref const pure automatic
 
-"syn keyword 	svType		reg string enum struct event bit semaphore
-"syn keyword 	svType		rand randc integer parameter localparam specparam defparam
-"syn keyword 	svType		logic int mailbox input output inout unsigned signed time wire
-"syn keyword 	svType		shortint longint byte real
+syn keyword 	svType		reg string enum struct event bit semaphore
+syn keyword 	svType		rand randc integer parameter localparam specparam defparam
+syn keyword 	svType		logic int mailbox unsigned signed time wire genvar
+syn keyword 	svType		shortint longint byte real
 
 "syn keyword     svDeprecated	call_func call_task close_conn get_bind get_bind_id
 "syn keyword     svDeprecated	get_conn_err mailbox_receive mailbox_send make_client
@@ -217,8 +217,8 @@ else
   endif
 endif
 " keep a // comment separately, it terminates a preproc. conditional
-syntax match	svCommentError		display "\*/"
-syntax match	svCommentStartError 	display "/\*"me=e-1 contained
+"syntax match	svCommentError		display "\*/"
+"syntax match	svCommentStartError 	display "/\*"me=e-1 contained
 
 " syntax region	svBlock		start="{" end="}" transparent fold
 syntax region	svBlock		start="begin" end="end" transparent fold
