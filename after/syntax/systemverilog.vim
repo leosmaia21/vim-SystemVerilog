@@ -27,7 +27,7 @@ syn keyword	svStatement	join_any join_none frokjoin binsof intersect wait wait_o
 
 syn keyword	svLabel		bind constraint covergroup coverpoint
 syn keyword	svLabel		class CLOCK clocking default function interface modport 
-syn keyword	svLabel		package program property randseq sequence specify
+syn keyword	svLabel		package program property randseq sequence specify generate
 syn keyword	svLabel		task 
 syn keyword	svLabel		begin initial forever final import 
 syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram
