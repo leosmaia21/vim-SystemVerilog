@@ -161,35 +161,6 @@ syn region	svBracket	transparent start='\[' end=']' contains=ALLBUT,@svParenGrou
 syn region	svCppBracket	transparent start='\[' skip='\\$' excludenl end=']' end='$' contained contains=ALLBUT,@svParenGroup,svParen,svBracket,svString,@Spell
 "syn match	svErrInBracket	display contained "[);{}]"
 
-"integer number, or floating point number without a dot and with "f".
-syn case ignore
-syn match	svNumbers	display transparent "\<\d\|\.\d" contains=svNumber,svFloat,svOctalError,svOctal
-" Same, but without octal error (for comments)
-syn match	svNumbersCom	display contained transparent "\<\d\|\.\d" contains=svNumber,svFloat,svOctal
-" syn match	svNumber	display contained "\d\+\(u\=l\{0,2}\|ll\=u\)\>"
-" "hex number
-" syn match	svNumber	display contained "0x\x\+\(u\=l\{0,2}\|ll\=u\)\>"
-" syn match   svNumber "\(\<[0-9]\+\|\)'[bdoh][0-9a-fxzA-FXZ_]\+\>"
-syn match	svNumber 	"\<\(\<[0-9]\+\)\?\('[bdoh]\)\?[0-9a-fxz_]\+\>"
-" syn match   svNumber "\<[+-]\=[0-9]\+\>"
-" Flag the first zero of an octal number as something special
-syn match	svOctal		display contained "0\o\+\(u\=l\{0,2}\|ll\=u\)\>" contains=svOctalZero
-syn match	svOctalZero	display contained "\<0"
-syn match	svFloat		display contained "\d\+f"
-"floating point number, with dot, optional exponent
-syn match	svFloat		display contained "\d\+\.\d*\(e[-+]\=\d\+\)\=[fl]\="
-"floating point number, starting with a dot, optional exponent
-syn match	svFloat		display contained "\.\d\+\(e[-+]\=\d\+\)\=[fl]\=\>"
-"floating point number, without dot, with exponent
-syn match	svFloat		display contained "\d\+e[-+]\=\d\+[fl]\=\>"
-"hexadecimal floating point number, optional leading digits, with dot, with exponent
-syn match	svFloat		display contained "0x\x*\.\x\+p[-+]\=\d\+[fl]\=\>"
-"hexadecimal floating point number, with leading digits, optional dot, with exponent
-syn match	svFloat		display contained "0x\x\+\.\=p[-+]\=\d\+[fl]\=\>"
-
-" flag an octal number with wrong digits
-syn match	svOctalError	display contained "0\o*[89]\d*"
-syn case match
 
 let sv_comment_strings = 0
 
@@ -243,7 +214,7 @@ syn keyword svConstant	STR_ERR_REGEXP_SYNTAX SUM TRANS VERBOSE void WAIT
 syn keyword svConstant	__LINE__ __FILE__ __DATE__ __TIME__ 
 syn keyword svConstant	__VERSION__ 
 
-syn match   svUserConstant "\<[A-Z][A-Z0-9_]\+\>"
+"syn match   svUserConstant "\<[A-Z][A-Z0-9_]\+\>"
 syn match   svUvmMacro  "`\(u\|o\)vm_\w\+"
 
 syn match svClass 	"\zs\w\+\ze::"
@@ -253,6 +224,38 @@ syn match svClass 	"\zs\w\+\ze\s*#(" contains=svConstant,svUserConstant
 syn match svUserMethod 	"\zs\w\+\ze\s*(" contains=svConstant,svUserConstant
 syn match svObject 	"\zs\w\+\ze\.\w"
 syn match svObject 	"\zs\w\+\ze\.\$\w"
+
+"integer number, or floating point number without a dot and with "f".
+syn case ignore
+syn match	svNumbers	display transparent "\<\d\|\.\d" contains=svNumber,svFloat,svOctalError,svOctal
+" Same, but without octal error (for comments)
+syn match	svNumbersCom	display contained transparent "\<\d\|\.\d" contains=svNumber,svFloat,svOctal
+" Integer numbers
+syn match	svNumber	display contained "\d\+\(u\=l\{0,2}\|ll\=u\)\>"
+" Hex number
+syn match	svNumber	display contained "0x\x\+\(u\=l\{0,2}\|ll\=u\)\>"
+" SystemVerilog based numbers
+syn match	svNumber	display contained "\(\<[0-9]\+\|\)'[bdoh][0-9a-fxzA-FXZ_]\+\>"
+" Simple integers (but not if followed by a dot to avoid conflicts with floats)
+syn match	svNumber	display contained "\<[+-]\=[0-9]\+\>\ze\([^.]\|$\)"
+" Flag the first zero of an octal number as something special
+syn match	svOctal		display contained "0\o\+\(u\=l\{0,2}\|ll\=u\)\>" contains=svOctalZero
+syn match	svOctalZero	display contained "\<0"
+syn match	svFloat		display contained "\d\+f"
+"floating point number, with dot, optional exponent
+syn match	svFloat		display contained "\d\+\.\d*\(e[-+]\=\d\+\)\=[fl]\="
+"floating point number, starting with a dot, optional exponent
+syn match	svFloat		display contained "\.\d\+\(e[-+]\=\d\+\)\=[fl]\=\>"
+"floating point number, without dot, with exponent
+syn match	svFloat		display contained "\d\+e[-+]\=\d\+[fl]\=\>"
+"hexadecimal floating point number, optional leading digits, with dot, with exponent
+syn match	svFloat		display contained "0x\x*\.\x\+p[-+]\=\d\+[fl]\=\>"
+"hexadecimal floating point number, with leading digits, optional dot, with exponent
+syn match	svFloat		display contained "0x\x\+\.\=p[-+]\=\d\+[fl]\=\>"
+
+" flag an octal number with wrong digits
+"syn match	svOctalError	display contained "0\o*[89]\d*"
+"syn case match
 
 " Accept ` for # (Verilog)
 syn region	svPreCondit	start="^\s*\(`\|#\)\s*\(if\|ifdef\|ifndef\|elsif\)\>" skip="\\$" end="$" end="//"me=s-1 contains=svComment,svCppString,svCharacter,svCppParen,svParenError,svNumbers,svCommentError,svSpaceError
