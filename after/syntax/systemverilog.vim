@@ -33,6 +33,7 @@ syn keyword	svStatement	join_any join_none frokjoin binsof intersect wait wait_o
 "syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram
 "syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
 
+syn keyword	svLabel		begin end
 syn keyword	svConditional	if iff else case casex casez endcase randcase
 syn keyword	svConditional	unique priority randsequence endsequence 
 syn keyword 	svRepeat	repeat while for do foreach
