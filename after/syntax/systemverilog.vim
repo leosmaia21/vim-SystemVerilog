@@ -37,7 +37,7 @@ syn keyword	svConditional	if iff else case casex casez endcase randcase
 syn keyword	svConditional	unique priority randsequence endsequence 
 syn keyword 	svRepeat	repeat while for do foreach
 syn keyword 	svModifier	after all any around assoc_size async
-syn keyword 	svModifier	before big_endian bit_normal bit_reverse export
+"syn keyword 	svModifier	before big_endian bit_normal bit_reverse export
 "syn keyword 	svModifier	before big_endian bit_normal bit_reverse
 syn keyword 	svModifier	extends extern hdl_node hdl_task implements interconnect little_endian local
 syn keyword 	svModifier	negedge nettype none packed protected posedge public rules
