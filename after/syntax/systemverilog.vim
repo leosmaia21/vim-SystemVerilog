@@ -25,13 +25,13 @@ syn keyword	svStatement	always always_comb always_ff always_latch assert
 syn keyword	svStatement	break return continue fork join disable force release assign alias
 syn keyword	svStatement	join_any join_none frokjoin binsof intersect wait wait_order
 
-syn keyword	svLabel		bind constraint covergroup coverpoint
-syn keyword	svLabel		class CLOCK clocking default function interface modport 
-syn keyword	svLabel		package program property randseq sequence specify generate
-syn keyword	svLabel		task 
-syn keyword	svLabel		begin initial forever final import 
-syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram
-syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
+"syn keyword	svLabel		bind constraint covergroup coverpoint
+"syn keyword	svLabel		class CLOCK clocking default function interface modport 
+"syn keyword	svLabel		package program property randseq sequence specify generate
+"syn keyword	svLabel		task 
+"syn keyword	svLabel		begin initial forever final import 
+"syn keyword	svLabel		end endclass endfunction endgenerate endtask endprogram
+"syn keyword	svLabel		endinterface endpackage endproperty endclocking endgroup
 
 syn keyword	svConditional	if iff else case casex casez endcase randcase
 syn keyword	svConditional	unique priority randsequence endsequence 
