@@ -1,1 +1,1 @@
-au BufNewFile,BufRead *.sv,*.svi,*.svh	set filetype=systemverilog
+au BufNewFile,BufRead *.v,*.sv,*.svi,*.svh	set filetype=systemverilog
