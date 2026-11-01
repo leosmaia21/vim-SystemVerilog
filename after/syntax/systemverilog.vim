@@ -1,72 +1,50 @@
-" SystemVerilog - after/syntax - clean version
-" Based on Vera + leosmaia21 fixes
-" Fixes: instance with ( on next line + param WIDTH / wIDTH + instance.member chain
+" Vim syntax file - FINAL minimal + UVM
+" Language: SystemVerilog
+" Requires: nvim's native verilog.vim (already loaded by systemverilog.vim)
+" Only contains what nvim does NOT have + your fixes
 
-if exists("b:current_syntax")
-endif
-
-"runtime! syntax/verilog.vim
-
-" --- Extra SystemVerilog keywords ---
-syn keyword verilogStatement always_comb always_ff always_latch
-syn keyword verilogStatement checker endchecker
-syn keyword verilogStatement rand randc constraint
-syn keyword verilogStatement interface endinterface modport
-syn keyword verilogStatement package endpackage
-syn keyword verilogStatement program endprogram
-syn keyword verilogStatement class endclass extends implements
-syn keyword verilogStatement function endfunction
-syn keyword verilogStatement covergroup endgroup coverpoint cross
-syn keyword verilogStatement property endproperty sequence endsequence
-syn keyword verilogStatement let
-syn keyword verilogType logic bit byte shortint longint shortreal int unsigned chandle string void semaphore mailbox
-syn keyword verilogStatement import export inside dist with fork join join_any join_none unique unique0 priority timeunit timeprecision var ref const protected local static automatic virtual new
-
-" --- FIX 1: Instance with ( on next line ---
+" --- FIX 1: Instance name with ( on next line ---
+" nvim uses \s (space/tab only) so my_mod my_inst\n( fails
 syn clear verilogInstantiation
 syn clear verilogInstanceName
 syn match verilogInstanceName contained "\<\h\w*\>"
 syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*(\@=" contains=verilogInstanceName
 syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*#\_s*(\@=" contains=verilogInstanceName
-syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*#\_s*\_s*(\_s*.*\_s*)\_s*\_s*(\@=" contains=verilogInstanceName
 hi def link verilogInstanceName Identifier
 
 " --- FIX 2: Parameter WIDTH and wIDTH ---
-syn clear verilogConstant
-syn match verilogConstant "`\<\h\w*\>"
-syn match verilogParamMixed "\<[A-Za-z][A-Z0-9_]\+\>" 
-hi def link verilogParamMixed Constant
+" Matches: WIDTH, MY_PARAM, wIDTH, pDEPTH (first A-Z or a-z, rest UPPERCASE)
+syn match svUserConstant "\<[A-Za-z][A-Z0-9_]\+\>"
+hi def link svUserConstant Constant
 
-" --- FIX 3: Instance members CHAIN: a.b.c.d ---
-" Clear old
-syn clear verilogMember
-syn clear verilogDotMember
-syn clear verilogMemberName
-syn clear verilogDotAccess
-syn clear verilogDotAccessChain
-syn clear verilogMethodCall
+" --- FIX 3: Member chain a.b.c and port .clk( ---
+syn match svMemberName contained "\<\h\w*\>"
+syn match svMemberChain "\<\h\w*\>\(\s*\.\s*\<\h\w*\>\)\+" contains=svMemberName
+syn match svPortName contained "\<\h\w*\>"
+syn match svPortConn "\.\s*\<\h\w*\>\s*(\@=" contains=svPortName
+hi def link svMemberName Function
+hi def link svPortName Type
 
-" Member name after dot (contained, will be highlighted)
-syn match verilogMemberName contained "\<\h\w*\>"
+" --- UVM: Macros `uvm_* and `ovm_* (not in nvim native) ---
+syn match svUvmMacro "`\(u\|o\)vm_\w\+"
+hi def link svUvmMacro Function
 
-" CHAIN: matches first identifier plus one or more .identifier
-" Example: my_inst.a.b.c  -> my_inst = normal, .a .b .c = Function
-" \(\s*\.\s*\<\h\w*\>\)\+ = one or more repetitions of .member
-syn match verilogMemberChain "\<\h\w*\>\(\s*\.\s*\<\h\w*\>\)\+" contains=verilogMemberName
-" Also match standalone .member for cases like .member inside struct assignment
-syn match verilogDotOnly "\.\s*\<\h\w*\>" contains=verilogMemberName
-
-" Method chain: a.b.c() - highlights c as Function when followed by (
-syn match verilogMethodChain "\<\h\w*\>\(\s*\.\s*\<\h\w*\>\)*\s*\.\s*\<\h\w*\>\s*(\@=" contains=verilogMemberName
-
-hi def link verilogMemberName Function
-hi def link verilogMemberChain Operator
-hi def link verilogDotOnly Operator
-hi def link verilogMethodChain Function
-
-" --- FIX 4: Comments ---
-syn clear verilogComment
-syn match verilogComment "//.*$" contains=verilogTodo,@Spell
-syn region verilogComment start="/\*" end="\*/" contains=verilogTodo,@Spell fold
+" --- UVM/Class methods (not in nvim native) ---
+syn keyword svMethods atobin atohex atoi atooct atoreal backref bittostr capacity
+syn keyword svMethods compare constraint_mode DisableTrigger DoAction empty EnableCount EnableTrigger Event find
+syn keyword svMethods find_index find_first find_first_index find_last find_last_index
+syn keyword svMethods GetAssert get_at_least get_auto_bin getc GetCount get_coverage_goal get_cov_weight
+syn keyword svMethods get_cross_bin_max GetFirstAssert GetName GetNextAssert get_status get_status_msg hide hash
+syn keyword svMethods icompare insert inst_get_at_least inst_get_auto_bin_max inst_get_collect
+syn keyword svMethods inst_get_coverage_goal inst_get_cov_weight inst_getcross_bin_max inst_query
+syn keyword svMethods inst_set_at_least inst_set_auto_bin_max inst_set_bin_activiation inst_set_collect
+syn keyword svMethods inst_set_coverage_goal inst_set_cov_weight inst_set_cross_bin_max itoa last_index
+syn keyword svMethods len load match max max_index min min_index new object_compare object_copy object_print pack pick_index
+syn keyword svMethods pop_back pop_front post_boundary postmatch post_pack post_randomize post_unpack
+syn keyword svMethods pre_boundary prematch pre_pack pre_randomize pre_unpack product push_back push_front putc query
+syn keyword svMethods query_str rand_mode randomize reserve reverse rsort search set_at_least set_auto_bin_max
+syn keyword svMethods set_bin_activiation set_coverage_goal set_cov_weight set_cross_bin_max shuffle size sort substr sum
+syn keyword svMethods thismatch tolower toupper unique_index Wait num delete exists first last next prev
+hi def link svMethods Statement
 
 let b:current_syntax = "systemverilog"
