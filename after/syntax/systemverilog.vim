@@ -13,8 +13,7 @@ endfor
 " Highlight ONLY the instance name (2nd word); module name left untouched
 syn match verilogInstantiation "\<\h\w*\>\_s\+\zs\<\h\w*\>\ze\%(\_s\|//.*\n\)*("
 syn match verilogInstantiation "\(#\_s*(\_[^;]\{-})\_s*\)\@300<=\<\h\w*\>\ze\%(\_s\|//.*\n\)*("
-hi link verilogInstantiation svInstanceName
-hi def svInstanceName guifg=#ff9e64 ctermfg=215 gui=bold cterm=bold
+hi def link verilogInstantiation Function
 
 " --- FIX 2: Parameter WIDTH and wIDTH ---
 " Matches: WIDTH, MY_PARAM, wIDTH, pDEPTH (first A-Z or a-z, rest UPPERCASE)
