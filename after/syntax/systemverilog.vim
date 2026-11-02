@@ -13,7 +13,8 @@ endfor
 " Highlight ONLY the instance name (2nd word); module name left untouched
 syn match verilogInstantiation "\<\h\w*\>\_s\+\zs\<\h\w*\>\ze\%(\_s\|//.*\n\)*("
 syn match verilogInstantiation "\(#\_s*(\_[^;]\{-})\_s*\)\@300<=\<\h\w*\>\ze\%(\_s\|//.*\n\)*("
-hi def link verilogInstantiation Special
+hi link verilogInstantiation svInstanceName
+hi def svInstanceName guifg=#ff9e64 ctermfg=215 gui=bold cterm=bold
 
 " --- FIX 2: Parameter WIDTH and wIDTH ---
 " Matches: WIDTH, MY_PARAM, wIDTH, pDEPTH (first A-Z or a-z, rest UPPERCASE)
@@ -51,3 +52,4 @@ syn keyword svMethods thismatch tolower toupper unique_index Wait num delete exi
 hi def link svMethods Statement
 
 let b:current_syntax = "systemverilog"
+
