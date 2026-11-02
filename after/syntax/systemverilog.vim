@@ -10,10 +10,10 @@ for s:g in ["verilogInstantiation", "verilogInstanceName"]
     execute 'syn clear ' .. s:g
   endif
 endfor
-syn match verilogInstanceName contained "\<\h\w*\>"
-syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*(\@=" contains=verilogInstanceName
-syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*#\_s*(\@=" contains=verilogInstanceName
-hi def link verilogInstanceName Identifier
+" Highlight ONLY the instance name (2nd word); module name left untouched
+syn match verilogInstantiation "\<\h\w*\>\_s\+\zs\<\h\w*\>\ze\%(\_s\|//.*\n\)*("
+syn match verilogInstantiation "\(#\_s*(\_[^;]\{-})\_s*\)\@300<=\<\h\w*\>\ze\%(\_s\|//.*\n\)*("
+hi def link verilogInstantiation Special
 
 " --- FIX 2: Parameter WIDTH and wIDTH ---
 " Matches: WIDTH, MY_PARAM, wIDTH, pDEPTH (first A-Z or a-z, rest UPPERCASE)
@@ -21,7 +21,7 @@ syn match svUserConstant "\<[A-Za-z][A-Z0-9_]\+\>"
 hi def link svUserConstant Constant
 
 " --- FIX 3: Member chain a.b.c and port .clk( ---
-syn match svMemberName contained "\<\h\w*\>"
+syn match svMemberName contained "\.\s*\zs\<\h\w*\>"
 syn match svMemberChain "\<\h\w*\>\(\s*\.\s*\<\h\w*\>\)\+" contains=svMemberName
 syn match svPortName contained "\<\h\w*\>"
 syn match svPortConn "\.\s*\<\h\w*\>\s*(\@=" contains=svPortName
