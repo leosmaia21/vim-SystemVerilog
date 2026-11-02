@@ -5,8 +5,11 @@
 
 " --- FIX 1: Instance name with ( on next line ---
 " nvim uses \s (space/tab only) so my_mod my_inst\n( fails
-syn clear verilogInstantiation
-syn clear verilogInstanceName
+for s:g in ["verilogInstantiation", "verilogInstanceName"]
+  if hlexists(s:g)
+    execute 'syn clear ' .. s:g
+  endif
+endfor
 syn match verilogInstanceName contained "\<\h\w*\>"
 syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*(\@=" contains=verilogInstanceName
 syn match verilogInstantiation "\<\h\w*\>\_s\+\<\h\w*\>\_s*#\_s*(\@=" contains=verilogInstanceName
